@@ -1,30 +1,33 @@
-import Hello from "./component/Hello";
-import Welcome from "./component/Welcome";
+import styles from './App.css';
+import { useState } from 'react';
 
 function App() {
-  // 변수
-  const name = "Hong";
-  let age = 30 ;
-  let gender = true;
-  
-  // 객체 
-  const naver = {
-    name : "네이버",
-    url : "https://www.naver.com",
-    target : "_blank"
+ const[names, setNames] = useState(['홍길동', '임꺽정']);
+ const[input, setInput] = useState('');
+
+ const handleInputChange = (e) =>{
+    setInput(e.target.value) ;
+ };
+  const handleUpload = () => {
+    //  setNames(['홍길동', '임꺽정', input]);
+    // 이전 상태값에 현재값을 추가 하고 싶다.
+    // prevState => 이전 state 상태값을 기억하고 있는 변수
+    setNames((prevState)=>{
+      return ([...prevState, input])
+    })
   }
   return (
     <div className="App">
-      {/* 컴포넌트 */}
-     <Hello></Hello>
-     <Welcome></Welcome>
-     {/* {변수,숫자, 문자열} 사용가능  */}
-     <h1> {'이름 : '} {name} ,{"나이 : "} {age} </h1>
-     <h1> 이름 : {name} ,나이 : {age} </h1>
-     {/* 객체 {객체이름.속성} */}
-     <h2><a href={naver.url} target={naver.target}>{naver.name}</a></h2>
+      <input type='text' value={input} onChange={handleInputChange}  />
+      <button onClick={handleUpload}>upload</button>
+      {/* 배열이다.  */}
+      {/* 한번에 나옴 {names} */}
+
+      {/* 배열일 경우 하나씩 호출하는 방법 */}
+      {names.map((name,idx) => {
+        return <p key={idx}>{name}</p>
+      })}
     </div>
   );
 }
-
 export default App;
