@@ -61,11 +61,16 @@ function Create(props) {
 }
 
 export default function Main02() {
-    const top = [
-        {id:1, title:"HTML", body : "Hypertext Markup Language"},
-        {id:2, title:"CSS", body : "Cascading Style Sheets"},
-        {id:3, title:"JS", body : "JavaScript"},
-    ];
+    // const top = [
+    //     {id:1, title:"HTML", body : "Hypertext Markup Language"},
+    //     {id:2, title:"CSS", body : "Cascading Style Sheets"},
+    //     {id:3, title:"JS", body : "JavaScript"},
+    // ];
+    const [top, setTop] = useState([
+        {id:1, title:"HTML", body:"Hypertext Markup Language"},
+        {id:2, title:"CSS",body:"Cascading Style Sheets"},
+        {id:3, title:"JS",body:"JavaScript"}
+    ])
 
     const [mode, setMode] = useState('WELCOME');
     const [id, setId] = useState(null);
@@ -91,7 +96,7 @@ export default function Main02() {
             const newTops = [...top]
             // newTops에 파라미터로 넘어온 값을 배열로 만든 newTop 추가 
             newTops.push(newTop);
-            set
+            setTop(newTops);
             setMode('READ')
             setId(nextId)
             setNextId(nextId+1)
@@ -99,7 +104,7 @@ export default function Main02() {
     }
 
     return(
-        <div>
+        <div style={{marginLeft:"100px"}}>
             {/* 컴포넌트, props */}
            <Head title="WEB" onChangeMode={()=>{
             //  alert("Head");
