@@ -61,11 +61,6 @@ function Create(props) {
 }
 
 export default function Main02() {
-    // const top = [
-    //     {id:1, title:"HTML", body : "Hypertext Markup Language"},
-    //     {id:2, title:"CSS", body : "Cascading Style Sheets"},
-    //     {id:3, title:"JS", body : "JavaScript"},
-    // ];
     const [top, setTop] = useState([
         {id:1, title:"HTML", body:"Hypertext Markup Language"},
         {id:2, title:"CSS",body:"Cascading Style Sheets"},
@@ -77,6 +72,9 @@ export default function Main02() {
     const [nextId, setNextId] = useState(4);
     let content = null;
 
+    // 수정/삭제를 위한 변수 (READ에서만 수정 삭제가 나오게 )
+    let contextControl = null;
+    
     if(mode === 'WELCOME'){
      content = <Article title="Welcome" body="Hello, WEB" />;
     }else if(mode === 'READ'){
@@ -89,11 +87,19 @@ export default function Main02() {
           }        
        } 
        content = <Article title={title} body={body} />;
+       
+       // 모드가 READ일때만 수정,삭제 을 나오게 하자 
+       // 하나를 수정하기 위해서는 아이디가 필요하다.
+       contextControl = <li><a href={"/update/"+id}>Update</a></li>
     }else if(mode === 'CREATE'){
         content = <Create onCreate={(_title, _body)=>{
+            // input type에서 입력한 값을 받아서 배열 처리 
             const newTop = {id:nextId, title:_title, body:_body};
+            
+            // useState에서 초기값이 배열이면 무조건 배열 복사 하자
             // top 배열을 복사 해서 newTops를 만든다.
             const newTops = [...top]
+           
             // newTops에 파라미터로 넘어온 값을 배열로 만든 newTop 추가 
             newTops.push(newTop);
             setTop(newTops);
@@ -122,6 +128,10 @@ export default function Main02() {
                 e.preventDefault();
                 setMode('CREATE');
             }}>Create</a>
+           </p>
+           <p>
+            {/*  수정삭제 */}
+            {contextControl}
            </p>
         </div>
     );
