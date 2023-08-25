@@ -75,7 +75,12 @@ function Update(props) {
             {/* props 는 변경할 수 없다. */}
             {/* <p><input type="text" name="title" value={props.title} /> </p>
             <p><textarea name="body" value={props.body}></textarea></p> */}
-            
+            <p><input type="text" name="title" value={title} onChange={(e)=>{
+                    setTitle(e.target.value);
+            }} /></p>
+             <p><textarea name="body" value={body} onChange={(e)=>{
+                setBody(e.target.value);
+             }}></textarea></p>
             <p><input type="submit" value="Update" /></p>
         </form>
     </article>
@@ -144,7 +149,22 @@ export default function Main02() {
                 body = top[i].body;
             }        
         }
-        content = <Update title={title} body={body} onUpdate={(_title, _body)=>{}}></Update>
+        content = <Update title={title} body={body} onUpdate={(_title, _body)=>{
+          //  alert("update 실행하기 ");
+          // 원래 내용 복사
+          const newTops = [...top];
+          // 변경할 내용 
+          const updateTop = {id:Number(id), title:_title, body:_body};
+          for (let i = 0; i < newTops.length; i++) {
+            if(newTops[i].id === Number(id)){
+                // 새로운 내용이 기존 내용을 덮어쓰기 하자
+                newTops[i] = updateTop ;
+                break;
+            }
+          }
+          setTop(newTops);
+          setMode("READ");
+        }}></Update>
     }
 
     return(
