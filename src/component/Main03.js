@@ -19,7 +19,7 @@ export default function Main03() {
             return oldCnt - 1 ;
         }else if(action === 'RESET'){
             return 0;
-        }else if(action == 'UP'){
+        }else if(action === 'UP'){
             return oldCnt + 1 ;
         }else if(action.type === 'DOWN3'){
             return  oldCnt - action.number;   

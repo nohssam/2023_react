@@ -7,6 +7,7 @@ import EmptyPage from "./component/EmptyPage";
 import Main03 from "./component/Main03";
 import Main04 from "./component/Main04";
 import Main05 from "./component/Main05";
+import Main06 from "./component/Main06";
 
 // 1.App 를 BrowserRouter 로 감싼다.
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <button style={{marginLeft:"10px"}}><Link to="/main03"> Main03 </Link> </button>
       <button style={{marginLeft:"10px"}}><Link to="/main04"> Main04 </Link> </button>
       <button style={{marginLeft:"10px"}}><Link to="/main05"> Redux </Link> </button>
+      <button style={{marginLeft:"10px"}}><Link to="/main06"> ReduxToolkit </Link> </button>
     </div>
       <Routes>
         <Route path="/" />
@@ -28,6 +30,7 @@ function App() {
         <Route path="/main03" element={<Main03 />} />
         <Route path="/main04" element={<Main04 />} />
         <Route path="/main05" element={<Main05 />} />
+        <Route path="/main06" element={<Main06 />} />
 
         <Route path="/day/:day" element={<Day />} />
         <Route path="/dayList" element={<DayList />} />
